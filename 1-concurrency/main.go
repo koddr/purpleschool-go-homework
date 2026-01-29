@@ -30,6 +30,7 @@ func main() {
 	}()
 
 	wg.Wait()
+	close(intCh)
 
 	fmt.Println(intSlice)
 }
