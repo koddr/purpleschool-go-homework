@@ -13,17 +13,21 @@ func main() {
 	intCh := make(chan int, 10)
 	intSlice := make([]int, 10)
 
-	wg.Go(func() {
+	wg.Add(2)
+
+	go func() {
+		defer wg.Done()
 		for range len(intSlice) {
 			intCh <- rand.Intn(100)
 		}
-	})
+	}()
 
-	wg.Go(func() {
+	go func() {
+		defer wg.Done()
 		for i := range len(intSlice) {
 			intSlice[i] = int(math.Pow(float64(<-intCh), 2))
 		}
-	})
+	}()
 
 	wg.Wait()
 
