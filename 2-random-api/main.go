@@ -12,7 +12,7 @@ func main() {
 
 	router.HandleFunc("/random", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-		fmt.Fprint(w, rand.Intn(6))
+		fmt.Fprint(w, rand.Intn(6)+1)
 	})
 
 	server := &http.Server{
